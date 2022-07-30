@@ -1,6 +1,6 @@
 {
     "name": "Twitch Emotes Extension",
-    "description": "Replace some text to an emote in a twitch chat.",
+    "description": "A Twitch extension that replaces keywords with custom emotes.",
     "version": "1.0",
     "manifest_version": 3,
     "icons": {
@@ -19,6 +19,6 @@
         "tabs"
     ],
     "host_permissions": [
-        "https://www.google.com/*"
+        "*://*.twitch.tv/aruten_"
     ]
 }
