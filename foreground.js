@@ -7,8 +7,9 @@ const emotes = [["Edab", "https://cdn.discordapp.com/attachments/336995258875379
 				["Ebern", "https://cdn.discordapp.com/attachments/336995258875379715/1002261965734953040/bernard.png"],
 				["Epog", "https://cdn.discordapp.com/attachments/336995258875379715/1002350472771932210/pogofgreed.png"],
 				["Estyle", "https://cdn.discordapp.com/attachments/336995258875379715/1002240017885843516/picardia-small.png"]];
-
-document.addEventListener('keypress', function() {    
+				
+let messageContainer = document.getElementsByClassName("chat-scrollable-area__message-container")[0];
+let observer = new MutationObserver(mutationRecords => {
 	for (let j = 0; j < messages.length; j++) {
 		for (let i = 0; i < emotes.length; i++) {
 			oldMsg = messages[j].innerHTML;
@@ -21,9 +22,11 @@ document.addEventListener('keypress', function() {
 									</div>
 								</span>
 							</div>
-						</div>`
+						</div>`;
 				messages[j].innerHTML = oldMsg.split(emotes[i][0]).join(emote);
 			}
 		}
 	}
 });
+
+observer.observe(messageContainer, { childList: true });
