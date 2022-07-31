@@ -26,6 +26,6 @@
         "tabs"
     ],
     "host_permissions": [
-        "*://*.twitch.tv/aruten_"
+        "https://www.twitch.tv/aruten_"
     ]
 }
