@@ -1,6 +1,6 @@
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 	if (changeInfo.status === "complete" && tab.url === "https://www.twitch.tv/aruten_") {
-		chrome.scripting.executeScript({
+		browser.scripting.executeScript({
 			target: { tabId: tabId },
 			files: ["./scripts/foreground.js"]
 		}).then(() => {
