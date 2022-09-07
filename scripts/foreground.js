@@ -41,7 +41,7 @@ function addBadges() {
 		for (let i = 0; i < badges.length; i++) {
 			oldName = authors[j].textContent;
 			if (oldName.toLowerCase().indexOf(badges[i][0]) !== -1 && oldName.indexOf(badges[i][1]) === -1) {
-				authors[j].innerHTML = badges[i][1] + oldName;
+				authors[j].textContent = badges[i][1] + oldName;
 			}
 		}
 	}
