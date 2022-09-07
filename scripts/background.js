@@ -2,8 +2,7 @@ let api;
 
 if (typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined") {
 	api = chrome;
-}
-else if (typeof browser !== "undefined" && typeof browser.runtime !== "undefined") {
+} else if (typeof browser !== "undefined" && typeof browser.runtime !== "undefined") {
 	api = browser;
 }
 
