@@ -1,7 +1,7 @@
 {
     "name": "Twitch Emotes Extension",
     "description": "A Twitch extension that replaces keywords with custom emotes.",
-    "version": "1.0",
+    "version": "1.1",
     "manifest_version": 2,
     "icons": {
         "16": "/images/icon-16x16.png",
