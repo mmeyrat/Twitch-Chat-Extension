@@ -7,8 +7,14 @@ var emotes = [["Edab", "https://cdn.discordapp.com/attachments/33699525887537971
 			  ["Epog", "https://cdn.discordapp.com/attachments/336995258875379715/1002350472771932210/pogofgreed.png"],
 			  ["Estyle", "https://cdn.discordapp.com/attachments/336995258875379715/1002240017885843516/picardia-small.png"]];
 
+var badges = [["coeurbot", "💗"], 
+			  ["millca__", "👑"],
+			  ["maxome_", "😳"],
+			  ["pierrow__", "🕵️‍♂️"]]
+
 var messageContainer = document.getElementsByClassName("chat-scrollable-area__message-container")[0];
-var messages = document.getElementsByClassName("chat-line__message");
+var messages = document.getElementsByClassName("text-fragment");
+var authors = document.getElementsByClassName("chat-author__display-name");
 
 function replaceTextToEmote() {
 	for (let j = 0; j < messages.length; j++) {
@@ -30,10 +36,23 @@ function replaceTextToEmote() {
 	}
 }
 
+function addBadges() {
+	for (let j = 0; j < authors.length; j++) {
+		for (let i = 0; i < badges.length; i++) {
+			oldName = authors[j].textContent;
+			if (oldName.toLowerCase().indexOf(badges[i][0]) !== -1 && oldName.indexOf(badges[i][1]) === -1) {
+				authors[j].innerHTML = badges[i][1] + oldName;
+			}
+		}
+	}
+}
+
 replaceTextToEmote();
+addBadges()
 
 var observer = new MutationObserver(mutation => {
 	replaceTextToEmote();
+	addBadges();
 });
 
 observer.observe(messageContainer, { 
