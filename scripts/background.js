@@ -36,9 +36,9 @@ api.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 			api.scripting.executeScript({
 				target: {tabId}, 
 				files: ["./scripts/foreground.js"],
-			});
-		}).then(() => {
-			console.log("Foreground script started.");
-		}).catch(err => console.log(err));
+			}).then(() => {
+				console.log("Foreground script started.");
+			}).catch(err => console.log(err));
+		});
 	}
 });
