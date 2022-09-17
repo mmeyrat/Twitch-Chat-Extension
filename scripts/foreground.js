@@ -5,13 +5,13 @@ var authors = document.getElementsByClassName("chat-author__display-name");
 function replaceTextToEmote() {
 	for (let j = 0; j < messages.length; j++) {
 		for (let i = 0; i < emotes.length; i++) {
-			oldMsg = messages[j].innerHTML;
+			oldMsg = messages[j].textContent;
 			if (oldMsg.indexOf(emotes[i][0]) !== -1) {
 				emote = `<div class="chat-line__message--emote-button" data-test-selector="emote-button">
 							<div class="InjectLayout-sc-588ddc-0 kUvjun">
 								<span data-a-target="emote-name" aria-describedby="d891b00247c0ba4ed3c1c3ef712ed2a8">
 									<div class="Layout-sc-nxg1ff-0 kBZvCW chat-image__container">
-										<img alt="emote" class="chat-image chat-line__message--emote" src="${emotes[i][1]}" srcset="${emotes[i][1]} 1x,${emotes[i][1]} 2x,${emotes[i][1]} 4x">
+										<img alt="emote" class="chat-image chat-line__message--emote" src="${emotes[i][1]}">
 									</div>
 								</span>
 							</div>

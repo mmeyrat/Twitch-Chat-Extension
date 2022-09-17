@@ -1,18 +1,24 @@
 let api;
+let emotes = [];
+let badges = [["coeurbot", "💗"]];
 
-let emotes = [["Edab", "https://cdn.discordapp.com/attachments/336995258875379715/1002225356574576640/chika-dab.png"],
-			  ["Epet", "https://cdn.discordapp.com/attachments/336995258875379715/1002255919519891516/1659026811536.gif"],
-			  ["Esweat", "https://cdn.discordapp.com/attachments/336995258875379715/1002225464074567770/mario.PNG"],
-			  ["Edance", "https://cdn.discordapp.com/attachments/336995258875379715/1002226014266609685/kirbydance.gif"],                  
-			  ["Elove", "https://cdn.discordapp.com/attachments/336995258875379715/1002257152490098748/1659027117988.png"],
-			  ["Ebern", "https://cdn.discordapp.com/attachments/336995258875379715/1002261965734953040/bernard.png"],
-			  ["Epog", "https://cdn.discordapp.com/attachments/336995258875379715/1002350472771932210/pogofgreed.png"],
-			  ["Estyle", "https://cdn.discordapp.com/attachments/336995258875379715/1002240017885843516/picardia-small.png"]];
+(async () => {
+    let respEmotes = await fetch("https://maximemeyrat.fr/api/emotes");
+	let dataEmotes = await respEmotes.json();
+		
+	for (let i = 0; i < dataEmotes.length; i++) {
+		let text = dataEmotes[i].substr(0, dataEmotes[i].indexOf('.'));
+		let image = `https://maximemeyrat.fr/api/emotes/${dataEmotes[i]}`;
+		emotes.push([text, image]);
+	}
 
-let badges = [["coeurbot", "💗"], 
-			  ["millca__", "👑"],
-			  ["maxome_", "😳"],
-			  ["pierrow__", "🕵️‍♂️"]]
+	let respBadges = await fetch("https://maximemeyrat.fr/api/badges");
+	let dataBadges = await respBadges.json();
+
+	for (let key in dataBadges) {
+		badges.push([key, dataBadges[key]]);      
+	}
+})();
 
 if (typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined") {
 	api = chrome;
@@ -32,7 +38,7 @@ api.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 				files: ["./scripts/foreground.js"],
 			});
 		}).then(() => {
-			console.log("foreground script started");
+			console.log("Foreground script started.");
 		}).catch(err => console.log(err));
 	}
 });
