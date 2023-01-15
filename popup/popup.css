@@ -1,39 +1,102 @@
 @import url('http://fonts.cdnfonts.com/css/made-tommy-outline');
 
+:root {
+	--dark-color: #222222;
+	--shadow-color: #888888;
+	--main-color: #e3bcff;
+	--light-color: #ffffff;
+}
+
+html, body {
+	overflow-y: scroll;
+	scrollbar-width: none;
+}
+
 body {
-	background-color: #222222;
+	background-color: var(--dark-color);
 	font-family: 'MADE TOMMY', sans-serif;
 	font-size: 16px;
+	width: 350px;
+	box-shadow: 0px 0px 12px 4px var(--main-color);
+	caret-color: transparent;
 }
 
-table {
-	width: 200px;
-	background-color: #ffffff;
-	border-collapse: collapse;
-	border-width: 4px;
-	border-color: #e3bcff;
-	border-style: solid;
-	color: #222222;
-	box-shadow: 0px 0px 12px 4px #e3bcff;
+body::-webkit-scrollbar {
+	display: none;
 }
 
-td, th {
-	text-align: center;
-	border-width: 4px;
-	border-color: #e3bcff;
-	border-style: solid;
+#navbar {
+	background-color: var(--light-color);
+	width: 100%;
+	height: 40px;
+	display: table;
+    table-layout: fixed;
+	cursor: pointer;
+	caret-color: transparent;
+	font-weight: bold;
+}
+
+.navbar-element {
+	display: table-cell;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+	box-shadow: inset 0px 0px 10px 2px var(--shadow-color);
+}
+
+.active-category {
+	background-color: var(--main-color);
+	box-shadow: unset;
+	cursor: default;
+}
+
+#main {
+	background-color: var(--main-color);
+	padding: 8px;
+	padding-top: 16px;
+	background: linear-gradient(0deg, var(--light-color) 0%, var(--main-color) 100%);
+}
+
+#emotes-container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	justify-content: space-around;
+}
+
+#emotes-container img {
+	max-width: 32px;
+	margin: auto;
+}
+
+.emote {
+	display: flex;
+	flex-flow: column;
+	min-width: 60px;
+	margin-bottom: 12px;
 	padding: 4px;
 }
 
-thead {
-	background-color: #e3bcff;
+#banners-container img {
+	max-width: calc(100% - 16px);
+	margin: 8px;
+	margin-bottom: 0px;
 }
 
-img {
-	max-width: 32px;
-	vertical-align: middle;
+#banners-container span {
+	padding-top: 5px;
 }
 
-.keyword {
-	cursor: copy;
+.banner {
+	margin-left: 6px;
+	margin-right: 6px;
+	margin-bottom: 12px;
+}
+
+.preview {
+	background-color: var(--light-color);
+	border-radius: 4px;
+	text-align: center;
+	cursor: cell;
+	box-shadow: 0px 0px 4px 1px var(--shadow-color);
 }

@@ -1,20 +1,54 @@
 document.addEventListener('DOMContentLoaded', async function() {
+	let navbarCategories = document.getElementsByClassName("navbar-element");
+
+	for (let i = 0; i < navbarCategories.length; i++) {
+		navbarCategories[i].addEventListener('click', event => {
+			selectCategory(navbarCategories, i);
+		})
+	}
+	
 	let respEmotes = await fetch("https://maximemeyrat.fr/api/emotes");
 	let dataEmotes = await respEmotes.json();
-	let tableBbody = document.getElementsByTagName("tbody")[0];
+	let emotesContainer = document.getElementById("emotes-container");
 
 	for (let i = 0; i < dataEmotes.length; i++) {
-		let row = document.createElement('tr');
-		row.innerHTML = `<td><span class="keyword">${dataEmotes[i].substr(0, dataEmotes[i].indexOf('.'))}</span></td>
-						 <td><img src="https://maximemeyrat.fr/api/emotes/${dataEmotes[i]}"></td>`
-		tableBbody.appendChild(row);
+		let elem = document.createElement('div');
+		elem.classList.add("emote", "preview");
+		elem.innerHTML = `<img src="https://maximemeyrat.fr/api/emotes/${dataEmotes[i]}">
+						  <span>${dataEmotes[i].substr(0, dataEmotes[i].indexOf('.'))}</span>`
+		emotesContainer.appendChild(elem);
 	}
 
-	let keywords = document.getElementsByClassName('keyword');
+	let respBanners = await fetch("https://maximemeyrat.fr/api/bannerlist");
+	let dataBanners = await respBanners.json();
+	let bannersContainer = document.getElementById("banners-container");
 
-	for (let i = 0; i < keywords.length; i++) {
-		keywords.item(i).addEventListener('click', function() {
-			navigator.clipboard.writeText(this.textContent);
+	for (let i = 0; i < dataBanners.length; i++) {
+		let elem = document.createElement('div');
+		elem.classList.add("banner", "preview");
+		elem.innerHTML = `<img src="https://maximemeyrat.fr/api/banners/${dataBanners[i]}">
+						  <span>${dataBanners[i].substr(0, dataBanners[i].indexOf('.'))}</span>`
+		bannersContainer.appendChild(elem);
+	}
+
+	let previews = document.getElementsByClassName('preview');
+
+	for (let i = 0; i < previews.length; i++) {
+		previews.item(i).addEventListener('click', function() {
+			navigator.clipboard.writeText(this.textContent.trim());
 		});
 	}
 });
+
+
+function selectCategory(navbarCategories, id) {
+	for (let i = 0; i < navbarCategories.length; i++) {
+		if (i == id) {
+			navbarCategories[i].classList.add("active-category");
+			document.getElementById("main").children[i].style.display = "";
+		} else if (navbarCategories[i].classList.contains("active-category")) {
+			navbarCategories[i].classList.remove("active-category");
+			document.getElementById("main").children[i].style.display = "none";
+		}
+	}
+}
