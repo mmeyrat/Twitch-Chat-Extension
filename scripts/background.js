@@ -1,9 +1,10 @@
 let api;
 let emotes = [];
+let banners = [];
 let badges = [["coeurbot", "💗"]];
 
 (async () => {
-    let respEmotes = await fetch("https://maximemeyrat.fr/api/emotes");
+	let respEmotes = await fetch("https://maximemeyrat.fr/api/emotes");
 	let dataEmotes = await respEmotes.json();
 		
 	for (let i = 0; i < dataEmotes.length; i++) {
@@ -16,7 +17,14 @@ let badges = [["coeurbot", "💗"]];
 	let dataBadges = await respBadges.json();
 
 	for (let key in dataBadges) {
-		badges.push([key, dataBadges[key]]);      
+		badges.push([key, dataBadges[key]]);
+	}
+
+	let respBanners = await fetch("https://maximemeyrat.fr/api/banners");
+	let dataBanners = await respBanners.json();
+
+	for (let key in dataBanners) {
+		banners.push([key, dataBanners[key]]);
 	}
 })();
 
@@ -30,7 +38,7 @@ api.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 	if (changeInfo.status === "complete" && tab.url === "https://www.twitch.tv/aruten_") {
 		api.scripting.executeScript({
 			target: {tabId},
-			args: [{badges: badges, emotes: emotes}],
+			args: [{badges: badges, banners: banners, emotes: emotes}],
 			func: vars => Object.assign(self, vars),
 		}, () => {
 			api.scripting.executeScript({

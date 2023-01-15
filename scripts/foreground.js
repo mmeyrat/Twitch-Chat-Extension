@@ -1,4 +1,5 @@
 var messageContainer = document.getElementsByClassName("chat-scrollable-area__message-container")[0];
+var messageBackgrounds = document.getElementsByClassName("chat-line__message-container");
 var messages = document.getElementsByClassName("text-fragment");
 var authors = document.getElementsByClassName("chat-author__display-name");
 
@@ -33,12 +34,33 @@ function addBadges() {
 	}
 }
 
+function addBanners() {
+	for (let i = 0; i < self.banners.length; i++) {
+		for (let j = 0; j < messageBackgrounds.length; j++) {
+			if (messageBackgrounds[j].parentNode.getElementsByClassName("chat-author__display-name")[0].innerHTML.toLowerCase().indexOf(self.banners[i][0]) !== -1) {
+				messageBackgrounds[j].classList.add(self.banners[i][0]);
+			}
+		}
+
+		for (let j = 0; j < document.getElementsByClassName(self.banners[i][0]).length; j++) {
+			document.getElementsByClassName(self.banners[i][0])[j].style.cssText = `background-image: url("https://maximemeyrat.fr/api/banners/${banners[i][1]}.jpg");
+																					background-size: cover;
+																					background-position: center;
+																					background-color: rgb(77, 77, 77);
+																					background-blend-mode: multiply;
+																					box-shadow: inset 0px 0px 10px 1px var(--color-hinted-grey-2);`;
+		}
+	}
+}
+
 replaceTextToEmote();
-addBadges()
+addBadges();
+addBanners();
 
 var observer = new MutationObserver(mutation => {
 	replaceTextToEmote();
 	addBadges();
+	addBanners();
 });
 
 observer.observe(messageContainer, { 
