@@ -3,6 +3,9 @@ var messageBackgrounds = document.getElementsByClassName("chat-line__message-con
 var messages = document.getElementsByClassName("text-fragment");
 var authors = document.getElementsByClassName("chat-author__display-name");
 
+var badgesNb = 0;
+var bannersNb = 0;
+
 function replaceTextToEmote() {
 	for (let j = 0; j < messages.length; j++) {
 		for (let i = 0; i < emotes.length; i++) {
@@ -27,7 +30,7 @@ function addBadges() {
 	for (let j = 0; j < authors.length; j++) {
 		for (let i = 0; i < self.badges.length; i++) {
 			oldName = authors[j].textContent;
-			if (oldName.toLowerCase().indexOf(self.badges[i][0]) !== -1 && oldName.indexOf(self.badges[i][1]) === -1) {
+			if (oldName.toLowerCase().indexOf(self.badges[i][0]) !== -1 && oldName.length == self.badges[i][0].length) {
 				authors[j].textContent = self.badges[i][1] + oldName;
 			}
 		}
@@ -53,11 +56,64 @@ function addBanners() {
 	}
 }
 
+async function updateBadges() {
+		let respBadges = await fetch("https://maximemeyrat.fr/api/badges");
+		let dataBadges = await respBadges.json();
+		let newBadges = [["coeurbot", "💗"]];
+
+		for (let key in dataBadges) {
+			newBadges.push([key, dataBadges[key]]);
+		}
+		
+		self.badges = newBadges;
+}
+
+async function updateBanners() {
+		let respBanners = await fetch("https://maximemeyrat.fr/api/banners");
+		let dataBanners = await respBanners.json();
+		let newBanners = [];
+
+		for (let key in dataBanners) {
+			newBanners.push([key, dataBanners[key]]);
+		}
+		
+		self.banners = newBanners;
+}
+
+function checkUpdates() {
+	currentBadgesNb = 0;
+	currentBannersNb = 0;
+
+	for (let j = 0; j < messages.length; j++) {
+		let currentMsg = messages[j].textContent;
+		
+		if (currentMsg.indexOf("badge") !== -1) {
+			currentBadgesNb++;
+		}
+
+		if (currentMsg.indexOf("banner") !== -1) {
+			currentBannersNb++;
+		}
+	}
+
+	if (currentBadgesNb > badgesNb) {
+		setTimeout(updateBadges, 1000);
+	}
+
+	if (currentBannersNb > bannersNb) {
+		setTimeout(updateBanners, 1000);
+	}
+
+	badgesNb = currentBadgesNb;
+	bannersNb = currentBannersNb;
+}
+
 replaceTextToEmote();
 addBadges();
 addBanners();
 
 var observer = new MutationObserver(mutation => {
+	checkUpdates();
 	replaceTextToEmote();
 	addBadges();
 	addBanners();
