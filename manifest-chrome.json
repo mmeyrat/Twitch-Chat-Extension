@@ -26,6 +26,8 @@
         "tabs"
     ],
     "host_permissions": [
-        "https://www.twitch.tv/aruten_"
+        "https://www.twitch.tv/aruten_",
+        "https://www.twitch.tv/moderator/aruten_",
+        "https://dashboard.twitch.tv/u/aruten_/stream-manager"
     ]
 }

@@ -16,7 +16,6 @@
         "default_popup": "./popup/popup.html"
     },
     "permissions": [
-        "https://www.twitch.tv/aruten_",
         "<all_urls>",
         "scripting",
         "tabs"

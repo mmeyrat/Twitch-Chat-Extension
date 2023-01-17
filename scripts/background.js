@@ -35,7 +35,8 @@ if (typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined") {
 }
 
 api.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-	if (changeInfo.status === "complete" && tab.url === "https://www.twitch.tv/aruten_") {
+	if (changeInfo.status === "complete" && (tab.url === "https://www.twitch.tv/aruten_" || 
+		tab.url === "https://www.twitch.tv/moderator/aruten_" || tab.url === "https://dashboard.twitch.tv/u/aruten_/stream-manager")) {
 		api.scripting.executeScript({
 			target: {tabId},
 			args: [{badges: badges, banners: banners, emotes: emotes}],

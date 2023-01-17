@@ -119,6 +119,8 @@ var observer = new MutationObserver(mutation => {
 	addBanners();
 });
 
-observer.observe(messageContainer, { 
-	childList: true 
-});
+if (messageContainer) {
+	observer.observe(messageContainer, { 
+		childList: true 
+	});
+}
