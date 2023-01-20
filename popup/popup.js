@@ -7,15 +7,22 @@ document.addEventListener('DOMContentLoaded', async function() {
 		})
 	}
 	
-	let respEmotes = await fetch("https://maximemeyrat.fr/api/emotes");
+	let respEmotes = await fetch("https://maximemeyrat.fr/api/emotelist");
 	let dataEmotes = await respEmotes.json();
 	let emotesContainer = document.getElementById("emotes-container");
 
 	for (let i = 0; i < dataEmotes.length; i++) {
-		let elem = document.createElement('div');
+		let elem = document.createElement("div");
 		elem.classList.add("emote", "preview");
-		elem.innerHTML = `<img src="https://maximemeyrat.fr/api/emotes/${dataEmotes[i]}">
-						  <span>${dataEmotes[i].substr(0, dataEmotes[i].indexOf('.'))}</span>`
+
+		let img  = document.createElement("img");
+		img.src = `https://maximemeyrat.fr/api/emote/${dataEmotes[i]}`;
+
+		let title = document.createElement("span");
+		title.textContent = dataEmotes[i].substr(0, dataEmotes[i].indexOf('.'))
+
+		elem.appendChild(img);
+		elem.appendChild(title);		
 		emotesContainer.appendChild(elem);
 	}
 
@@ -26,8 +33,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 	for (let i = 0; i < dataBanners.length; i++) {
 		let elem = document.createElement('div');
 		elem.classList.add("banner", "preview");
-		elem.innerHTML = `<img src="https://maximemeyrat.fr/api/banners/${dataBanners[i]}">
-						  <span>${dataBanners[i].substr(0, dataBanners[i].indexOf('.'))}</span>`
+
+		let img  = document.createElement("img");
+		img.src = `https://maximemeyrat.fr/api/banner/${dataBanners[i]}`;
+
+		let title = document.createElement("span");
+		title.textContent = dataBanners[i].substr(0, dataBanners[i].indexOf('.'))
+
+		elem.appendChild(img);
+		elem.appendChild(title);		
 		bannersContainer.appendChild(elem);
 	}
 

@@ -4,12 +4,12 @@ let banners = [];
 let badges = [["coeurbot", "💗"]];
 
 (async () => {
-	let respEmotes = await fetch("https://maximemeyrat.fr/api/emotes");
+	let respEmotes = await fetch("https://maximemeyrat.fr/api/emotelist");
 	let dataEmotes = await respEmotes.json();
 		
 	for (let i = 0; i < dataEmotes.length; i++) {
 		let text = dataEmotes[i].substr(0, dataEmotes[i].indexOf('.'));
-		let image = `https://maximemeyrat.fr/api/emotes/${dataEmotes[i]}`;
+		let image = `https://maximemeyrat.fr/api/emote/${dataEmotes[i]}`;
 		emotes.push([text, image]);
 	}
 
