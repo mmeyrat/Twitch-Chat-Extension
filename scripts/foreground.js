@@ -9,9 +9,8 @@ var bannersNb = 0;
 function replaceTextToEmote() {
 	for (let j = 0; j < messages.length; j++) {
 		for (let i = 0; i < emotes.length; i++) {
-			oldMsg = messages[j].textContent;
-			if (oldMsg.indexOf(emotes[i][0]) !== -1) {
-				emote = `<div class="chat-line__message--emote-button" data-test-selector="emote-button">
+			if (messages[j].textContent.indexOf(emotes[i][0]) !== -1) {
+				let emote = `<div class="chat-line__message--emote-button" data-test-selector="emote-button">
 							<div class="InjectLayout-sc-588ddc-0 kUvjun">
 								<span data-a-target="emote-name" aria-describedby="d891b00247c0ba4ed3c1c3ef712ed2a8">
 									<div class="Layout-sc-nxg1ff-0 kBZvCW chat-image__container">
@@ -20,7 +19,7 @@ function replaceTextToEmote() {
 								</span>
 							</div>
 						</div>`;
-				messages[j].innerHTML = oldMsg.split(emotes[i][0]).join(emote);
+				messages[j].innerHTML =  messages[j].innerHTML.split(emotes[i][0]).join(emote).trim();
 			}
 		}
 	}
@@ -29,10 +28,9 @@ function replaceTextToEmote() {
 function addBadges() {
 	for (let j = 0; j < authors.length; j++) {
 		for (let i = 0; i < self.badges.length; i++) {
-			oldName = authors[j].textContent;
-			if (oldName.toLowerCase().indexOf(self.badges[i][0]) !== -1 && oldName.length == self.badges[i][0].length) {
+			let oldName = authors[j].textContent;
+			if (oldName.toLowerCase().indexOf(self.badges[i][0]) !== -1 && oldName.length == self.badges[i][0].length)
 				authors[j].textContent = self.badges[i][1] + oldName;
-			}
 		}
 	}
 }
@@ -40,9 +38,9 @@ function addBadges() {
 function addBanners() {
 	for (let i = 0; i < self.banners.length; i++) {
 		for (let j = 0; j < messageBackgrounds.length; j++) {
-			if (messageBackgrounds[j].parentNode.getElementsByClassName("chat-author__display-name")[0].innerHTML.toLowerCase().indexOf(self.banners[i][0]) !== -1) {
+			let chatterName = messageBackgrounds[j].parentNode.getElementsByClassName("chat-author__display-name")[0].innerHTML.toLowerCase();
+			if (chatterName.indexOf(self.banners[i][0]) !== -1)
 				messageBackgrounds[j].classList.add(self.banners[i][0]);
-			}
 		}
 
 		for (let j = 0; j < document.getElementsByClassName(self.banners[i][0]).length; j++) {
@@ -61,9 +59,8 @@ async function updateBadges() {
 		let dataBadges = await respBadges.json();
 		let newBadges = [["coeurbot", "💗"]];
 
-		for (let key in dataBadges) {
+		for (let key in dataBadges)
 			newBadges.push([key, dataBadges[key]]);
-		}
 		
 		self.badges = newBadges;
 }
@@ -73,36 +70,31 @@ async function updateBanners() {
 		let dataBanners = await respBanners.json();
 		let newBanners = [];
 
-		for (let key in dataBanners) {
+		for (let key in dataBanners)
 			newBanners.push([key, dataBanners[key]]);
-		}
 		
 		self.banners = newBanners;
 }
 
 function checkUpdates() {
-	currentBadgesNb = 0;
-	currentBannersNb = 0;
+	let currentBadgesNb = 0;
+	let currentBannersNb = 0;
 
 	for (let j = 0; j < messages.length; j++) {
 		let currentMsg = messages[j].textContent;
 		
-		if (currentMsg.indexOf("badge") !== -1) {
+		if (currentMsg.indexOf("badge") !== -1)
 			currentBadgesNb++;
-		}
 
-		if (currentMsg.indexOf("banner") !== -1) {
+		if (currentMsg.indexOf("banner") !== -1) 
 			currentBannersNb++;
-		}
 	}
 
-	if (currentBadgesNb > badgesNb) {
+	if (currentBadgesNb > badgesNb)
 		setTimeout(updateBadges, 1000);
-	}
 
-	if (currentBannersNb > bannersNb) {
+	if (currentBannersNb > bannersNb)
 		setTimeout(updateBanners, 1000);
-	}
 
 	badgesNb = currentBadgesNb;
 	bannersNb = currentBannersNb;

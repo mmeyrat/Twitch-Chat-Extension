@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener("DOMContentLoaded", async function() {
 	let navbarCategories = document.getElementsByClassName("navbar-element");
 
 	for (let i = 0; i < navbarCategories.length; i++) {
-		navbarCategories[i].addEventListener('click', event => {
+		navbarCategories[i].addEventListener("click", () => {
 			selectCategory(navbarCategories, i);
 		})
 	}
@@ -11,15 +11,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 	let dataEmotes = await respEmotes.json();
 	let emotesContainer = document.getElementById("emotes-container");
 
-	for (let i = 0; i < dataEmotes.length; i++) {
+	for (let emote of dataEmotes) {
 		let elem = document.createElement("div");
 		elem.classList.add("emote", "preview");
 
 		let img  = document.createElement("img");
-		img.src = `https://maximemeyrat.fr/api/emote/${dataEmotes[i]}`;
+		img.src = `https://maximemeyrat.fr/api/emote/${emote}`;
 
 		let title = document.createElement("span");
-		title.textContent = dataEmotes[i].substr(0, dataEmotes[i].indexOf('.'))
+		title.textContent = emote.substr(0, emote.indexOf("."))
 
 		elem.appendChild(img);
 		elem.appendChild(title);		
@@ -30,26 +30,26 @@ document.addEventListener('DOMContentLoaded', async function() {
 	let dataBanners = await respBanners.json();
 	let bannersContainer = document.getElementById("banners-container");
 
-	for (let i = 0; i < dataBanners.length; i++) {
-		let elem = document.createElement('div');
+	for (let banner of dataBanners) {
+		let elem = document.createElement("div");
 		elem.classList.add("banner", "preview");
 
 		let img  = document.createElement("img");
-		img.src = `https://maximemeyrat.fr/api/banner/${dataBanners[i]}`;
+		img.src = `https://maximemeyrat.fr/api/banner/${banner}`;
 
 		let title = document.createElement("span");
-		title.textContent = dataBanners[i].substr(0, dataBanners[i].indexOf('.'))
+		title.textContent = banner.substr(0, banner.indexOf("."))
 
 		elem.appendChild(img);
 		elem.appendChild(title);		
 		bannersContainer.appendChild(elem);
 	}
 
-	let previews = document.getElementsByClassName('preview');
+	let previews = document.getElementsByClassName("preview");
 
-	for (let i = 0; i < previews.length; i++) {
-		previews.item(i).addEventListener('click', function() {
-			navigator.clipboard.writeText(this.textContent.trim());
+	for (let p of previews) {
+		p.addEventListener("click", () => {
+			navigator.clipboard.writeText(p.textContent.trim());
 		});
 	}
 });
