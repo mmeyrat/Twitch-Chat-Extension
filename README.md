@@ -18,7 +18,7 @@ This extension can only be installed manually, so follow each of these steps car
 ### Firefox
 
 This extension is available on Mozilla's addons website, so follow each of these steps :
-1. Go to this [page](https://addons.mozilla.org/en/firefox/addon/twitch-emotes-extension/).
+1. Go to this [page](https://addons.mozilla.org/en/firefox/addon/twitch-chat-extension/).
 2. Click `Add to Firefox`.
 
 ---
