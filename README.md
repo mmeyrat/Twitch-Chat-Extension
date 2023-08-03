@@ -1,6 +1,6 @@
 # Twitch Chat Extension
 
-A web brower extension made with Chrome & Firefox Manifest v3. It adds custom emotes on the Twitch chat of [my channel](https://www.twitch.tv/aruten_). Emotes are only replaced in the chat area and will only be replaced on my channel. Additionnaly, the extension lets you add backgrounds (banners) to messages and badges next to users' names. Clicking on the extension icon in the extension menu will display all available emotes and banners with their respective keywords. 
+A web brower extension made with Chrome Manifest v3 and Firefox Manifest v2. It adds custom emotes on the Twitch chat of [my channel](https://www.twitch.tv/aruten_). Emotes are only replaced in the chat area and will only be replaced on my channel. Additionnaly, the extension lets you add backgrounds (banners) to messages and badges next to users' names. Clicking on the extension icon in the extension menu will display all available emotes and banners with their respective keywords. 
 
 ## Installation guide
 

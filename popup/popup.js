@@ -31,18 +31,20 @@ document.addEventListener("DOMContentLoaded", async function() {
 	let bannersContainer = document.getElementById("banners-container");
 
 	for (let banner of dataBanners) {
-		let elem = document.createElement("div");
-		elem.classList.add("banner", "preview");
-
-		let img  = document.createElement("img");
-		img.src = `https://maximemeyrat.fr/api/banner/${banner}`;
-
-		let title = document.createElement("span");
-		title.textContent = banner.substr(0, banner.indexOf("."))
-
-		elem.appendChild(img);
-		elem.appendChild(title);		
-		bannersContainer.appendChild(elem);
+		if (!banner.startsWith("_")) {
+			let elem = document.createElement("div");
+			elem.classList.add("banner", "preview");
+			
+			let img  = document.createElement("img");
+			img.src = `https://maximemeyrat.fr/api/banner/${banner}`;
+			
+			let title = document.createElement("span");
+			title.textContent = banner.substr(0, banner.indexOf("."))
+			
+			elem.appendChild(img);
+			elem.appendChild(title);		
+			bannersContainer.appendChild(elem);
+		}
 	}
 
 	let previews = document.getElementsByClassName("preview");

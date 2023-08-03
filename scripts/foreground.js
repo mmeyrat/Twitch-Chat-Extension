@@ -44,7 +44,7 @@ function addBanners() {
 		}
 
 		for (let j = 0; j < document.getElementsByClassName(self.banners[i][0]).length; j++) {
-			document.getElementsByClassName(self.banners[i][0])[j].style.cssText = `background-image: url("https://maximemeyrat.fr/api/banner/${banners[i][1]}.jpg");
+			document.getElementsByClassName(self.banners[i][0])[j].style.cssText = `background-image: url("https://maximemeyrat.fr/api/banner/${banners[i][1]}");
 																					background-size: cover;
 																					background-position: center;
 																					background-color: rgb(77, 77, 77);

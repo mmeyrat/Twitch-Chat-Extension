@@ -2,7 +2,7 @@
     "name": "Twitch Chat Extension",
     "description": "A Twitch extension that enhances the chat experience with custom emotes, badges and backgrounds.",
     "version": "1.6",
-    "manifest_version": 3,
+    "manifest_version": 2,
     "icons": {
         "16": "/images/icon-16x16.png",
         "32": "/images/icon-32x32.png",
@@ -12,16 +12,12 @@
     "background": {
         "scripts": ["./scripts/background.js"]
     },
-    "action": {
+    "browser_action": {
         "default_popup": "./popup/popup.html"
     },
     "permissions": [
+        "<all_urls>",
         "scripting",
         "tabs"
-    ],
-    "host_permissions": [
-        "https://www.twitch.tv/aruten_",
-        "https://www.twitch.tv/moderator/aruten_",
-        "https://dashboard.twitch.tv/u/aruten_/stream-manager"
     ]
 }
